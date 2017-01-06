@@ -1,0 +1,23 @@
+[alias]
+    revert = reset --hard HEAD
+
+[code]
+    editor = vim
+    excludesfile = ~/.dotfiles/git/gitignore
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+
+[push]
+    default = simple
+
+[status]
+    showUntrackedFiles = all
+
+[user]
+    name = Florian Neveu
+    email = hello@fnev.eu
+
