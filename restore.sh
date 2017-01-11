@@ -18,3 +18,5 @@ for file in $(find ~ -maxdepth 1 -name .zshrc -o -name .gitconfig); do
     fi
     fi
 done
+
+exec zsh

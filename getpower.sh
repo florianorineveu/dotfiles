@@ -21,3 +21,5 @@ for file in $(find $DOTFILES_DIR -name zshrc -o -name gitconfig -type f); do
     ln -sfv "$file" ~/.$target
 done
 unset target
+
+exec zsh
