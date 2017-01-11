@@ -1,4 +1,4 @@
-#ZSH_THEME="agnoster"
+ZSH_THEME="agnoster"
 plugins=(git)
 
 ## FUCK
