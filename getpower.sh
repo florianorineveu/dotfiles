@@ -3,6 +3,8 @@
 # Find dotfiles directory path
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+#cd $DOTFILES_DIR/git/plugins && git clone https://github.com/olivierverdier/zsh-git-prompt.git git-prompt
+
 # Register the execution date for backups
 date_suffix=$(date +_%F-%T-%N)
 

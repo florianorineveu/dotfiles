@@ -1,7 +1,6 @@
-ZSH_THEME="agnoster"
-plugins=(git)
+setopt prompt_subst
+source "$CZSH/zsh/agnoster.zsh-theme"
 
 ## FUCK
 export PATH="/usr/local/sbin:$PATH"
-eval "$(thefuck --alias)"
-
+#eval "$(thefuck --alias)"
