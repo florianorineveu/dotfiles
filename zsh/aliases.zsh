@@ -3,8 +3,8 @@ alias mkdir="mkdir -p"
 alias www="cd ~/Developpement"
 
 ### Nginx
-alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
-alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.start='brew services start nginx'
+alias nginx.stop='brew services stop nginx'
 alias nginx.restart='nginx.stop && nginx.start'
 
 ### PHP-fpm
