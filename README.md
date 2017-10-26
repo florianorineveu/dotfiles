@@ -3,7 +3,7 @@ I've got the power ! 🎶
 
 ## Installation
 ```
-git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles && ~/.dotfiles/getpower.sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fnev-eu/dotfiles/master/getpower.sh)"
 ```
 
 ## Uninstall
