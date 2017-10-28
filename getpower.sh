@@ -21,16 +21,14 @@ else
     NORMAL=""
 fi
 
-CZSH= ~/.dotfiles
-
 printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
-env git clone --recursive https://github.com/fnev-eu/dotfiles.git ${CZSH} || {
+env git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles || {
     printf "${YELLOW}Error:${NORMAL} git clone of dotfiles repo failed\n"
     exit 1
 }
 
 echo "# shortcut to this dotfiles path is $ZSH
-export CZSH=${CZSH}
+export CZSH=~/.dotfiles
 
 for config_file ($CZSH/**/*.zsh) source $config_file
 " > ~/.zshrc
