@@ -1,6 +1,0 @@
-alias wiz.www="cd ~/Developpement/Wiztopic"
-alias wiz.start="curl glados:8000/wizvm/com/start"
-alias wiz.stop="curl glados:8000/wizvm/com/stop"
-alias wiz.status="curl glados:8000/wizvm/com/status"
-alias wiz.ssh="ssh-add && ssh -A vagrant@wiz.com"
-alias wiz.sshfs="wiz.www && sshfs vagrant@wiz.com:/home/vagrant/ www"
