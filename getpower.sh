@@ -1,5 +1,7 @@
 #!/bin/bash
 
+curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+
 if which tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
 fi
@@ -19,63 +21,19 @@ else
     NORMAL=""
 fi
 
-CHECK_ZSH_INSTALLED=$(grep /zsh$ /etc/shells | wc -l)
-if [ ! $CHECK_ZSH_INSTALLED -ge 1 ]; then
-    printf "${YELLOW}Zsh is not installed!${NORMAL} Please install zsh first!\n"
-    exit
-fi
-
-hash git >/dev/null 2>&1 || {
-    printf "${YELLOW}Git is not installed!${NORMAL} Please install git first!\n"
-    exit 1
-}
-
-if [ ! -n "$ZSH" ]; then
-    ZSH=~/.dotfiles
-fi
-
-if [ -d "$ZSH" ]; then
-    printf "${YELLOW}You already have dotfiles installed.${NORMAL}\n"
-    printf "You'll need to remove $ZSH if you want to re-install.\n"
-    exit
-fi
+CZSH= ~/.dotfiles
 
 printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
-env git clone --recursive https://github.com/fnev-eu/dotfiles.git $ZSH || {
+env git clone --recursive https://github.com/fnev-eu/dotfiles.git ${CZSH} || {
     printf "${YELLOW}Error:${NORMAL} git clone of dotfiles repo failed\n"
     exit 1
 }
 
-cd $ZSH/git/plugins && git clone https://github.com/olivierverdier/zsh-git-prompt.git git-prompt
+echo "# shortcut to this dotfiles path is $ZSH
+export CZSH=${CZSH}
 
-# Register the execution date for backups
-date_suffix=$(date +_%F-%T-%N)
+for config_file ($CZSH/**/*.zsh) source $config_file
+" > ~/.zshrc
 
-# Make symlink for a bunch of files.
-for file in $(find $ZSH -name zshrc -o -name gitconfig -type f); do
-    # Get the filename from path
-    target=$(basename $file)
+source .zshrc
 
-    if [ -f ~/.$target ]; then
-        # Backup the existing file before linking.
-        mv ~/.$target ~/.$target$date_suffix
-    fi
-
-    # Makes the symlink to dotfile.
-    ln -sfv "$file" ~/.$target
-done
-unset target
-
-# If this user's login shell is not already "zsh", attempt to switch.
-TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
-if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
-    if hash chsh >/dev/null 2>&1; then
-        printf "${BLUE}Time to change your default shell to zsh!${NORMAL}\n"
-        chsh -s $(grep /zsh$ /etc/shells | tail -1)
-    else
-        printf "I can't change your shell automatically because this system does not have chsh.\n"
-        printf "${BLUE}Please manually change your default shell to zsh!${NORMAL}\n"
-    fi
-fi
-
-env zsh

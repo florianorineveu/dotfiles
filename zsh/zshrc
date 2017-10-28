@@ -1,4 +1,0 @@
-# shortcut to this dotfiles path is $ZSH
-export CZSH=$HOME/.dotfiles
-
-for config_file ($CZSH/**/*.zsh) source $config_file
