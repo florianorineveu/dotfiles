@@ -1,6 +1,6 @@
 #!/bin/bash
 
-env sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+source <(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
 
 if which tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
