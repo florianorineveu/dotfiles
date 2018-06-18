@@ -21,6 +21,15 @@ else
     NORMAL=""
 fi
 
+printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n"
+env git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+
+#Set agnoster as theme
+
 printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
 env git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles || {
     printf "${YELLOW}Error:${NORMAL} git clone of dotfiles repo failed\n"
