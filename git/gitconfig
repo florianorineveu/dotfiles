@@ -11,6 +11,9 @@
     branch = auto
     ui = true
 
+[pager]
+    branch = false
+
 [push]
     default = simple
 
