@@ -19,44 +19,64 @@ else
     NORMAL=""
 fi
 
-printf "${BLUE}Installing Homebrew...${NORMAL}\n"
+printf "${BLUE}Installing Homebrew...${NORMAL}\n\n"
 #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-printf "${BLUE}Installing zsh...${NORMAL}\n"
-brew install zsh zsh-completions
-# To activate these completions, add the following to your .zshrc:
-#   fpath=(/usr/local/share/zsh-completions $fpath)
-# You may also need to force rebuild `zcompdump`:
-#   rm -f ~/.zcompdump; compinit
-# Additionally, if you receive "zsh compinit: insecure directories" warnings when attempting
-# to load these completions, you may need to run this:
-#   chmod go-w '/usr/local/share'
+printf "${BLUE}Installing zsh...${NORMAL}\n\n"
+#brew install zsh zsh-completions
 
-chsh -s /bin/zsh
+#chsh -s /bin/zsh
 
-printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n"
-env git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts
-./install.sh
-cd ..
-rm -rf fonts
+printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n\n"
+# env git clone https://github.com/powerline/fonts.git --depth=1
+# cd fonts
+# ./install.sh
+# cd ..
+# rm -rf fonts
+printf "Utiliser la font Meslo LG M for Powerline - Regular 12\n\n"
 
-#Set agnoster as theme
-
-printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
-env git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles || {
-    printf "${YELLOW}Error:${NORMAL} git clone of dotfiles repo failed\n"
-    exit 1
-}
+# printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
+# env git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles || {
+#     printf "${YELLOW}Error:${NORMAL} git clone of dotfiles repo failed\n"
+#     exit 1
+# }
 
 export CZSH=~/.dotfiles
 
-echo "# shortcut to this dotfiles path is $ZSH
+echo "# Add zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# shortcut to this dotfiles path is $ZSH
 export CZSH=~/.dotfiles
 " > ~/.zshrc
 
 for config_file in `find $CZSH -name "*.zsh" | grep -v '\.git'`; do
-    echo "source $config_file" >> ~/.zshrc
+    echo "source \"$config_file\"" >> ~/.zshrc
 done
 
-source .zshrc
+echo "
+source \"$CZSH/zsh/theme-agnoster/agnoster.zsh-theme\"
+" >> ~/.zshrc
 
+printf "${BLUE}Installing theefuck...${NORMAL}\n"
+#brew install thefuck
+echo "
+#
+eval \$(thefuck --alias)
+" >> ~/.zshrc
+
+source ~/.zshrc
+
+# # Add zsh-completions
+# fpath=(/usr/local/share/zsh-completions $fpath)
+
+# # shortcut to this dotfiles path is 
+# export CZSH=~/.dotfiles
+
+# source /Users/0ri/.dotfiles/vagrant/aliases.zsh
+# source /Users/0ri/.dotfiles/zsh/aliases.zsh
+# source /Users/0ri/.dotfiles/git/aliases.zsh
+
+# source "/Volumes/BETA/Developpement/dotfiles/zsh/theme-agnoster/agnoster.zsh-theme"
+# setopt promptsubst
+
+# eval $(thefuck --alias)
