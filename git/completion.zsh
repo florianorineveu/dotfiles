@@ -1,9 +1,9 @@
 if [ ! -f $CZSH/git/git-completion.bash ]; then
-    curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+    curl -o $CZSH/git/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 fi
 
 if [ ! -f $CZSH/git/_git ]; then
-    curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+    curl -o $CZSH/git/_git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 fi
 
 # Load Git completion

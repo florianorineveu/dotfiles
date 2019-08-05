@@ -55,6 +55,7 @@ done
 
 echo "
 source \"$CZSH/zsh/theme-agnoster/agnoster.zsh-theme\"
+setopt promptsubst
 " >> ~/.zshrc
 
 printf "${BLUE}Installing theefuck...${NORMAL}\n"
