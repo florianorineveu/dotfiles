@@ -34,11 +34,11 @@ printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n\n"
 # rm -rf fonts
 printf "Utiliser la font Meslo LG M for Powerline - Regular 12\n\n"
 
-# printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
-# env git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles || {
-#     printf "${YELLOW}Error:${NORMAL} git clone of dotfiles repo failed\n"
-#     exit 1
-# }
+printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
+env git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles || {
+    printf "${YELLOW}Error:${NORMAL} git clone of dotfiles repo failed\n"
+    exit 1
+}
 
 export CZSH=~/.dotfiles
 
