@@ -24,7 +24,7 @@ printf "${BLUE}Installing Homebrew...${NORMAL}\n\n"
 
 printf "${BLUE}Installing zsh...${NORMAL}\n\n"
 brew install zsh zsh-completions
-sudo chmod g-w /usr/local/share
+chmod go-w '/usr/local/share'
 chsh -s /bin/zsh
 
 printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n\n"
