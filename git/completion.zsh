@@ -10,4 +10,4 @@ fi
 zstyle ':completion:*:*:git:*' script $CZSH/git/git-completion.bash
 fpath=($CZSH/git/ $fpath)
 
-#autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit

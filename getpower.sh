@@ -21,10 +21,11 @@ fi
 
 printf "${BLUE}Installing Homebrew...${NORMAL}\n\n"
 #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-printf "${BLUE}Installing zsh...${NORMAL}\n\n"
-#brew install zsh zsh-completions
 
-#chsh -s /bin/zsh
+printf "${BLUE}Installing zsh...${NORMAL}\n\n"
+brew install zsh zsh-completions
+sudo chmod g-w /usr/local/share
+chsh -s /bin/zsh
 
 printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n\n"
 # env git clone https://github.com/powerline/fonts.git --depth=1
@@ -58,14 +59,14 @@ source \"$CZSH/zsh/theme-agnoster/agnoster.zsh-theme\"
 setopt promptsubst
 " >> ~/.zshrc
 
-printf "${BLUE}Installing theefuck...${NORMAL}\n"
-#brew install thefuck
+printf "${BLUE}Installing the fuck...${NORMAL}\n"
+brew install thefuck
 echo "
-#
+# The Fuck configuration
 eval \$(thefuck --alias)
 " >> ~/.zshrc
 
-source ~/.zshrc
+exec zsh -l
 
 # # Add zsh-completions
 # fpath=(/usr/local/share/zsh-completions $fpath)
