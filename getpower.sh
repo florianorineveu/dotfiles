@@ -43,7 +43,7 @@ env git clone --recursive https://github.com/fnev-eu/dotfiles.git ~/.dotfiles ||
 export CZSH=~/.dotfiles
 
 echo "# Add zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions \$fpath)
 
 # shortcut to this dotfiles path is $ZSH
 export CZSH=~/.dotfiles
