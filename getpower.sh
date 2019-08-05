@@ -19,21 +19,21 @@ else
     NORMAL=""
 fi
 
-printf "${BLUE}Installing Homebrew...${NORMAL}\n\n"
+printf "${BLUE}Installing Homebrew...${NORMAL}\n"
 #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-printf "${BLUE}Installing zsh...${NORMAL}\n\n"
+printf "${BLUE}Installing zsh...${NORMAL}\n"
 brew install zsh zsh-completions >> /dev/null
 chmod go-w '/usr/local/share'
 chsh -s /bin/zsh
 
-printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n\n"
+printf "${BLUE}Cloning Powerline fonts...${NORMAL}\n"
 env git clone https://github.com/powerline/fonts.git --depth=1 --quiet
 cd fonts
 ./install.sh
 cd ..
 rm -rf fonts
-printf "Utiliser la font Meslo LG M for Powerline - Regular 12\n\n"
+printf "Utiliser la font Meslo LG M for Powerline - Regular 12\n"
 
 printf "${BLUE}Cloning dotfiles...${NORMAL}\n"
 env git clone https://github.com/fnev-eu/dotfiles.git ~/.dotfiles --recursive --quiet || {
