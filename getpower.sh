@@ -20,7 +20,7 @@ else
 fi
 
 printf "${BLUE}Installing Homebrew...${NORMAL}\n"
-#/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 printf "${BLUE}Installing zsh...${NORMAL}\n"
 brew install zsh zsh-completions >> /dev/null
