@@ -62,6 +62,8 @@ install_macos_settings() {
     fi
 }
 
+info "Please type your password in order to setup homebrew and some configurations for MacOS..."
+
 # Ask for the administrator password upfront
 sudo -v
 
