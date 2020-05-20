@@ -3,24 +3,21 @@
 # The idea and some settings come from
 # https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 
-# Ask for the administrator password upfront
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName GLaDOS
-sudo scutil --set HostName GLaDOS
-sudo scutil --set LocalHostName GLaDOS
+#sudo scutil --set ComputerName GLaDOS
+#sudo scutil --set HostName GLaDOS
+#sudo scutil --set LocalHostName GLaDOS
+
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
 
 # Use list view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+# Four-letter codes for the other view modes: `icnv`, `Nlsv`, `clmv`, `glyv`
+defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
@@ -44,9 +41,6 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-# Always open everything in Finder's list view. This is important.
-defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 # Show the ~/Library folder.
 chflags nohidden ~/Library
@@ -97,12 +91,10 @@ defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 defaults write com.apple.screencapture type -string "png"
 
 # Set Desktop as the default location for new Finder windows
+# For desktop, use `PfDe` and `file://${HOME}/Desktop/`
 # For other paths, use `PfLo` and `file:///full/path/here/`
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
-
-# Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
 
 # Finder: show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
@@ -130,3 +122,43 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 # Show the /Volumes folder
 sudo chflags nohidden /Volumes
 
+# Disable screenshot shadows on a Mac
+defaults write com.apple.screencapture disable-shadow -bool true;
+# Revert : defaults write com.apple.screencapture disable-shadow -bool false; killall SystemUIServer
+
+# Display the file extensions in Finder
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true;
+# Revert : defaults write NSGlobalDomain AppleShowAllExtensions -bool false; killall Finder
+
+# Display additional information on the loginscreen
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+# Revert : sudo defaults delete /Library/Preferences/com.apple.loginwindow AdminHostInfo
+
+# Use plain text as default format in TextEdit
+defaults write com.apple.TextEdit RichText -int 0
+# Revert : defaults delete com.apple.TextEdit RichText
+
+# Stop Photos from opening automatically on your Mac
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+# Revert : defaults -currentHost delete com.apple.ImageCapture disableHotPlug
+
+# Adding `Quit` option to Finder on a Mac
+defaults write com.apple.finder QuitMenuItem -bool true;
+# Revert : defaults write com.apple.finder QuitMenuItem -bool false; killall Finder
+
+# Enable the expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+# Revert : defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool false
+# defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool false
+
+# Disable automatically rearrange Spaces based on recent use
+defaults write com.apple.dock mru-spaces -bool false
+# Revert : defaults write com.apple.dock mru-spaces -bool true
+
+# Make Crash Reporter appear as a notification
+defaults write com.apple.CrashReporter UseUNC 1
+# Revert : defaults write com.apple.CrashReporter UseUNC 0
+
+killall Finder
+killall SystemUIServer

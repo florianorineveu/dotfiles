@@ -3,34 +3,34 @@
 DOTFILES_ROOT=~/.dotfiles
 
 info () {
-    printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+    printf "\r  [ \033[00;34m..\033[0m ] %s\n" "$1"
 }
 
 user () {
-  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
+  printf "\r  [ \033[0;33m??\033[0m ] %s\n" "$1"
 }
 
 success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
 }
 
 fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
   echo ''
   exit 1
 }
 
 install_dotfiles() {
-    info "Installing dotfiles in ${DOTFILES_ROOT} ..."
-
     info "Check if dotfiles are already installed..."
     if [[ -d "${DOTFILES_ROOT}" ]]
     then
-        fail "${DOTFILES_ROOT} already exists on your filesystem."
+        info "Updating dotfiles..."
+        git pull
+    else
+        info "Installing dotfiles in ${DOTFILES_ROOT}..."
+        git clone https://github.com/fnev-eu/dotfiles.git ${DOTFILES_ROOT} --recursive --quiet || fail "Cloning repository failed."
     fi
 
-    info "Cloning repository..."
-    git clone https://github.com/fnev-eu/dotfiles.git ${DOTFILES_ROOT} --recursive --quiet || fail "Cloning repository failed."
 }
 
 install_brew() {
@@ -46,8 +46,31 @@ install_brew() {
     fi
 }
 
-install_dotfiles
+install_macos_settings() {
+    info "Configuration de MacOS..."
+
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+        ./macos/settings.sh
+    fi
+
+    if [[ $? -eq 0 ]]
+    then
+        success "Réglages MacOS configurés."
+    else
+        fail "Configuration de MaCOS échouée"
+    fi
+}
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 install_brew
+install_dotfiles
+install_macos_settings
 
 printf ""
 echo "Installation complete"

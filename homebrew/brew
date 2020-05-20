@@ -1,6 +1,7 @@
-vim 
+vim
 wget
 findutils
 gnupg
 htop
-
+git
+zsh

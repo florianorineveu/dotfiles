@@ -5,13 +5,21 @@ then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 
-    BREW_DEPENDENCIES=""
+    if [ -f ./homebrew/brew ]
+    then
+        while IFS= read -r line || [[ -n "$line" ]]; do
+            printf "\r  [ \033[00;34m..\033[0m ] Installing %s...\n" "$line"
+            brew install $line >/dev/null
+        done < ./homebrew/brew
+    fi
 
-    while IFS= read -r line || [[ -n "$line" ]]; do
-        BREW_DEPENDENCIES+=" ${line}"
-    done < ./homebrew/brew
-
-    brew install ${BREW_DEPENDENCIES}
+    if [ -f ./homebrew/cask ]
+    then
+        while IFS= read -r line || [[ -n "$line" ]]; do
+            printf "\r  [ \033[00;34m..\033[0m ] Installing %s...\n" "$line"
+            brew cask install $line >/dev/null
+        done < ./homebrew/cask
+    fi
 
     brew cleanup
 fi
