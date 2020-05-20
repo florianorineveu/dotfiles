@@ -30,8 +30,25 @@ install_dotfiles() {
     fi
 
     info "Cloning repository..."
-    git clone https://github.com/fnev-eu/dofiles.git ~/.dotfiles --recursive --quiet || fail "Cloning repository failed."
+    git clone https://github.com/fnev-eu/dotfiles.git ${DOTFILES_ROOT} --recursive --quiet || fail "Cloning repository failed."
+}
+
+install_brew() {
+    info "Installating homebrew and relative softwares..."
+
+    ./homebrew/install.sh
+
+    if [[ $? -eq 0 ]]
+    then
+        success "Brew installed"
+    else
+        fail "Brew failed"
+    fi
 }
 
 install_dotfiles
+install_brew
+
+printf ""
+echo "Installation complete"
 
