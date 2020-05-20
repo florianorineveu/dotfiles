@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+CURRENT_LOCATION=$(pwd -P)
 DOTFILES_ROOT=~/.dotfiles
 
 info () {
@@ -25,12 +26,13 @@ install_dotfiles() {
     if [[ -d "${DOTFILES_ROOT}" ]]
     then
         info "Updating dotfiles..."
-        git pull
+        git pull --recursive --quiet
     else
         info "Installing dotfiles in ${DOTFILES_ROOT}..."
         git clone https://github.com/fnev-eu/dotfiles.git ${DOTFILES_ROOT} --recursive --quiet || fail "Cloning repository failed."
     fi
 
+    success "dotfiles à jour."
 }
 
 install_brew() {
@@ -71,9 +73,13 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 install_dotfiles
+
+cd "${DOTFILES_ROOT}" || exit
+
 install_brew
 install_macos_settings
 
+cd "${CURRENT_LOCATION}" || exit
+
 printf ""
 echo "Installation complete"
-
