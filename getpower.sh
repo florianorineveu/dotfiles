@@ -87,7 +87,7 @@ install_macos_settings
 
 cd "${CURRENT_LOCATION}" || exit
 
-source ~/.zshrc
+exec $SHELL
 
 printf ""
 echo "Installation complete"
