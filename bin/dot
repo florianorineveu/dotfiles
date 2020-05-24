@@ -21,7 +21,7 @@ while test $# -gt 0; do
             ;;
 
         "update")
-            cd ${DOTFILES_DIRECTORY} && git pull >/dev/null
+            cd ${DOTFILES_DIRECTORY} && git pull origin master >/dev/null
             ${DOTFILES_DIRECTORY}/getpower.sh
             ;;
         *)
