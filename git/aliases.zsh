@@ -1,4 +1,4 @@
-lias g="git"
+alias g="git"
 alias got="git"
 alias gut="git"
 
