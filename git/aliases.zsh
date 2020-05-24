@@ -10,6 +10,7 @@ alias gd="git diff"
 alias gdi="git diff --ignore-space-change"
 
 alias ga="git add -A"
+alias gc="git commit -v"
 
 alias gt="git tag"
 
