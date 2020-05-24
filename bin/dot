@@ -1,5 +1,6 @@
 #!/bin/sh
 
+CURRENT_LOCATION=$(pwd -P)
 BIN_DIRECTORY="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 DOTFILES_DIRECTORY="$(cd "$(dirname "${BIN_DIRECTORY}")" && pwd -P)"
 
@@ -23,6 +24,7 @@ while test $# -gt 0; do
         "update")
             cd ${DOTFILES_DIRECTORY} && git pull origin master >/dev/null
             ${DOTFILES_DIRECTORY}/getpower.sh
+            cd "${CURRENT_LOCATION}" || exit
             ;;
         *)
             echo "Invalid option: $1"
