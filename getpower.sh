@@ -88,12 +88,8 @@ install_macos_settings
 
 cd "${CURRENT_LOCATION}" || exit
 
-if [[ "$(uname -s)" == "Darwin" ]]
-then
-    chsh -s /usr/local/bin/zsh
-else
-    chsh -s zsh
-fi
+sudo sh -c "echo $(which zsh) >> /etc/shells"
+chsh -s $(which zsh)
 
 printf ""
 echo "Installation complete"
