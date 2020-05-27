@@ -1,7 +1,7 @@
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
-export $DEVFOLDER=~/Développement
+export DEVFOLDER=~/Développement
 
 # all of our zsh files
 typeset -U config_files
