@@ -10,7 +10,7 @@ install_dotfiles() {
     if [[ -d "${DOTFILES_ROOT}" ]]
     then
         info "Updating dotfiles..."
-        cd "${DOTFILES_ROOT}" || exit
+        cd "${DOTFILES_ROOT}"
         git pull --quiet >/dev/null
     else
         info "Installing dotfiles in ${DOTFILES_ROOT}..."
@@ -42,7 +42,7 @@ install_brew() {
 install_macos_settings() {
     info "Configuration de MacOS..."
 
-    if [ "$(uname -s)" == "Darwin" ]
+    if [[ "$(uname -s)" == "Darwin" ]]
     then
         ./macos/settings.sh
     fi
@@ -97,12 +97,12 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 install_dotfiles
 
-cd "${DOTFILES_ROOT}" || exit
+cd "${DOTFILES_ROOT}"
 
 install_brew
 install_macos_settings
 
-cd "${CURRENT_LOCATION}" || exit
+cd "${CURRENT_LOCATION}"
 
 sudo sh -c "echo $(which zsh) >> /etc/shells"
 chsh -s $(which zsh)

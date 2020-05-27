@@ -1,4 +1,6 @@
 #!/bin/sh
+#
+# Helper for future scripts
 
 dotsuccess () {
     printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "${1}"

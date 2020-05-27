@@ -1,8 +1,9 @@
 #!/bin/sh
 #
-# credit: http://nparikh.org/notes/zshrc.txt
+# Usefull script to easily extract all type of archive
+# Credit: http://nparikh.org/notes/zshrc.txt
 
-extract () {
+smartextract () {
     if [ -f $1 ]; then
         dotinfo "Extract ${1}..."
         case $1 in

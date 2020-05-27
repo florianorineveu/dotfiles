@@ -1,11 +1,14 @@
 alias l="ls -lha"
 alias fuck="fuck -y"
 alias mkdir="mkdir -p"
+alias e="smartextract"
+alias o="open"
 
 # NAVIGATION
 ##########
 alias ..="cd .."
 alias ...="cd ../.."
-alias www="cd ${PROJECTS}"
+alias www="cd ${DEVFOLDER}"
+alias dotdir="cd ${DOTFILES}"
 
 alias cl="clear"

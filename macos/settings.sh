@@ -22,9 +22,9 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
-	General -bool true \
-	OpenWith -bool true \
-	Privileges -bool true
+    General -bool true \
+    OpenWith -bool true \
+    Privileges -bool true
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -58,18 +58,6 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 # Run the screensaver if we're in the bottom-left hot corner.
 defaults write com.apple.dock wvous-br-corner -int 5
 defaults write com.apple.dock wvous-br-modifier -int 0
-
-# Sleep the display after 15 minutes
-#sudo pmset -a displaysleep 15
-
-# Disable machine sleep while charging
-#sudo pmset -c sleep 0
-
-# Set machine sleep to 5 minutes on battery
-#sudo pmset -b sleep 5
-
-# Set standby delay to 24 hours (default is 1 hour)
-#sudo pmset -a standbydelay 86400
 
 # Never go into computer sleep mode
 sudo systemsetup -setcomputersleep Off > /dev/null

@@ -1,3 +1,10 @@
 #!/bin/sh
+#
+# Small script to quickly go to in a project repository
+# Autocomplete in `functions/_dev`
+#
+# Type:
+#   dev dot<tab>/fu<tab>
+# to quickly go in `~/Développement/dotfiles/functions`.
 
 cd "${DEVFOLDER}/${1}"

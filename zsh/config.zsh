@@ -1,5 +1,4 @@
 fpath=($DOTFILES/functions $fpath)
-
 autoload -U $DOTFILES/functions/*(:t)
 
 HISTFILE=~/.zsh_history

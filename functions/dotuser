@@ -1,4 +1,6 @@
 #!/bin/sh
+#
+# Helper for future scripts
 
 dotuser () {
     printf "\r  [ \033[0;33m??\033[0m ] %s\n" "${1}"
