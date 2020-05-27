@@ -1,5 +1,3 @@
-#compdef c
-_files -W $DEV_PROJECTS -/
-
-# See further documentation in `functions/c`.
+#compdef dev
+_files -W $DEVFOLDER -/
 
