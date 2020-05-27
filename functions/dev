@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+cd "${DEV_PROJECTS}/${1}"
