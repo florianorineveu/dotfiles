@@ -2,7 +2,7 @@ if [[ "$(uname -s)" == "Darwin" ]]
 then
     if ! [[ -x "$(command -v brew)" ]];
     then
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/main/install.sh)"
     fi
 
     brew update >/dev/null
