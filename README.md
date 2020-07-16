@@ -13,7 +13,7 @@ Files are sorted by category for better readability.
 
 ## Installation
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/fnev-eu/dotfiles/main/getpower.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fnev-eu/dotfiles/primary/getpower.sh)"
 ```
 
 ⚠️ Warning ! I highly recommend review before applying my settings. Especially if you are on MacOS.
