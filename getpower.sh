@@ -99,8 +99,8 @@ install_dotfiles
 
 cd "${DOTFILES_ROOT}"
 
-install_brew
-install_macos_settings
+#install_brew
+#install_macos_settings
 
 cd "${CURRENT_LOCATION}"
 

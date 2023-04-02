@@ -2,7 +2,7 @@ alias l="ls -lha"
 alias fuck="fuck -y"
 alias mkdir="mkdir -p"
 alias e="smartextract"
-alias o="open"
+alias o="explorer.exe"
 
 # NAVIGATION
 ##########

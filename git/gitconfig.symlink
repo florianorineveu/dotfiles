@@ -2,8 +2,8 @@
         path = ~/.gitconfig.local
 [core]
         excludesfile = ~/.gitignore
-        editor = vim
+        editor = nano
 [pull]
         rebase = false
 [init]
-        defaultBranch = primary
+        defaultBranch = main

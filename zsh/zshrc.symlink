@@ -1,6 +1,6 @@
 # Shortcut to this dotfiles path and other...
 export DOTFILES=$HOME/.dotfiles
-export DEVFOLDER=~/Développement
+export DEVFOLDER=~/Code
 
 # Source manjaro-zsh-configuration
 if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
