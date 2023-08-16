@@ -104,8 +104,8 @@ cd "${DOTFILES_ROOT}"
 
 cd "${CURRENT_LOCATION}"
 
-sudo sh -c "echo $(which zsh) >> /etc/shells"
-chsh -s $(which zsh)
+#sudo sh -c "echo $(which zsh) >> /etc/shells"
+#chsh -s $(which zsh)
 
 printf ""
 echo "Installation complete"
