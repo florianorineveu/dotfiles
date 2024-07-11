@@ -1,4 +1,4 @@
-alias l="LC_ALL=\"C\" ls -lh --color=auto --group-directories-first"
+alias l="ls -lhv --color=auto --group-directories-first"
 alias ll="l -a"
 alias fuck="fuck -y"
 alias mkdir="mkdir -p"
