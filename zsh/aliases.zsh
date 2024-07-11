@@ -1,4 +1,4 @@
-alias l="ls -lha"
+alias l="LC_ALL=\"C\" ls -lha --color=auto --group-directories-first"
 alias fuck="fuck -y"
 alias mkdir="mkdir -p"
 alias e="smartextract"
