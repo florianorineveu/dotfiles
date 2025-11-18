@@ -14,7 +14,7 @@ install_dotfiles() {
         git pull --quiet >/dev/null
     else
         info "Installing dotfiles in ${DOTFILES_ROOT}..."
-        git clone https://github.com/fnev-eu/dotfiles.git ${DOTFILES_ROOT} --recursive --quiet || fail "Cloning repository failed."
+        git clone https://github.com/florianorineveu/dotfiles.git ${DOTFILES_ROOT} --recursive --quiet || fail "Cloning repository failed."
     fi
 
     success "dotfiles are now up-to-date."
