@@ -1,4 +1,0 @@
-#compdef dev
-_files -W $DEVFOLDER -/
-
-# Autocomplete for `functions/dev`.
