@@ -54,23 +54,23 @@ detect_package_manager() {
 
     case "$os" in
         macos)
-            if command_exists("brew"); then
+            if command_exists brew; then
                 _DETECTED_PKG_MANAGER="brew"
             else
                 _DETECTED_PKG_MANAGER="none"
             fi
             ;;
         debian)
-            if command_exists("apt"); then
+            if command_exists apt; then
                 _DETECTED_PKG_MANAGER="apt"
             else
                 _DETECTED_PKG_MANAGER="none"
             fi
             ;;
         arch)
-            if command_exists("pacman"); then
+            if command_exists pacman; then
                 _DETECTED_PKG_MANAGER="pacman"
-            elif command_exists("yay"); then
+            elif command_exists yay; then
                 _DETECTED_PKG_MANAGER="yay"
             else
                 _DETECTED_PKG_MANAGER="none"
