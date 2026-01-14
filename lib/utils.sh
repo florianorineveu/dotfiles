@@ -75,6 +75,28 @@ can_sudo() {
 }
 
 # ------------------------------------------------------------------
+# Prompts
+# ------------------------------------------------------------------
+
+# Prompt user for confirmation (y/n)
+prompt_confirm() {
+    local prompt="${1:-Continuer ?}"
+    local response
+
+    printf "${YELLOW}[??]${RESET} %s [y/N] " "$prompt"
+    read -r response
+
+    case "$response" in
+        [yY][eE][sS]|[yY]|[oO][uU][iI]|[oO])
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+# ------------------------------------------------------------------
 # Utils
 # ------------------------------------------------------------------
 

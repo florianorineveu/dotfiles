@@ -110,7 +110,7 @@ install_from_brewfile() {
     fi
 
     log_substep "Installation depuis Brewfile..."
-    brew bundle --file="$brewfile" --no-lock
+    brew bundle --file="$brewfile"
 }
 
 # ------------------------------------------------------------------
