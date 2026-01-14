@@ -1,0 +1,5 @@
+# Homebrew - Minimal
+
+brew "git"
+brew "zsh"
+brew "curl"

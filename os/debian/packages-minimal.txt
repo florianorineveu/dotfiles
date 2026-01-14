@@ -1,0 +1,6 @@
+# Debian/Ubuntu - Minimal
+# Installation: apt-get install
+
+git
+zsh
+curl

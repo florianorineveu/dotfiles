@@ -1,0 +1,26 @@
+# Arch/Manjaro - Full
+# Installation: pacman -S
+
+# Base
+git
+zsh
+curl
+wget
+jq
+tree
+
+# CLI tools
+fzf
+bat
+fd
+ripgrep
+eza
+zoxide
+git-delta
+starship
+
+# Dev tools
+neovim
+htop
+btop
+thefuck

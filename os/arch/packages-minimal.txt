@@ -1,0 +1,6 @@
+# Arch/Manjaro - Minimal
+# Installation: pacman -S
+
+git
+zsh
+curl

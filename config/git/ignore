@@ -1,5 +1,4 @@
 # Global .gitignore
-# ~/.config/git/ignore
 #
 # Copyright (c) 2026 Florian "Ori" Neveu
 # SPDX-License-Identifier: WTFPL
@@ -13,7 +12,7 @@
 .directory
 .Trash-*
 
-# MacOS
+# macOS
 .DS_Store
 .AppleDouble
 .LSOverride

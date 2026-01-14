@@ -1,0 +1,11 @@
+# bat configuration
+#
+# Copyright (c) 2026 Florian "Ori" Neveu
+# SPDX-License-Identifier: WTFPL
+
+--theme="Catppuccin Mocha"
+--style="numbers,grid,changes"
+--color=always
+--italic-text=always
+--wrap=auto
+--paging=auto
