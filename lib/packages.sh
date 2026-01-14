@@ -82,7 +82,7 @@ install_packages_from_file() {
     local file="$1"
 
     if [[ ! -f "$file" ]]; then
-        log_warn "Fichier inexistant: $file"
+        log_warning "Fichier inexistant: $file"
         return 1
     fi
 
@@ -105,7 +105,7 @@ install_from_brewfile() {
     local brewfile="$1"
 
     if [[ ! -f "$brewfile" ]]; then
-        log_warn "Brewfile inexistant: $brewfile"
+        log_warning "Brewfile inexistant: $brewfile"
         return 1
     fi
 
@@ -124,10 +124,10 @@ install_minimal_tools() {
     pkg_manager=$(detect_package_manager)
 
     if [[ "$pkg_manager" == "none" ]]; then
-        log_warn "Pas de gestionnaire de paquets, vérification des prérequis uniquement"
-        command_exists git || log_warn "git non disponible"
-        command_exists zsh || log_warn "zsh non disponible"
-        command_exists curl || log_warn "curl non disponible"
+        log_warning "Pas de gestionnaire de paquets, vérification des prérequis uniquement"
+        command_exists git || log_warning "git non disponible"
+        command_exists zsh || log_warning "zsh non disponible"
+        command_exists curl || log_warning "curl non disponible"
     else
         update_package_index
 

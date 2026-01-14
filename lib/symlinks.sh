@@ -107,7 +107,7 @@ remove_symlink() {
         log_substep "Supprimé: $dest"
         return 0
     elif [[ -e "$dest" ]]; then
-        log_warn "Pas un symlink, ignoré: $dest"
+        log_warning "Pas un symlink, ignoré: $dest"
         return 1
     fi
     return 0
