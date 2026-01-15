@@ -12,7 +12,7 @@ $directory\
 $git_branch\
 $git_status\
 $nodejs\
-$php\
+${custom.php}\
 $python\
 $rust\
 $golang\
@@ -75,10 +75,30 @@ detect_folders = ["node_modules"]
 style = "bold green"
 
 [php]
+disabled = true
+
+[custom.php]
 symbol = " "
-format = "via [$symbol($version )]($style)"
-detect_files = ["composer.json", ".php-version"]
+command = '''
+dir="$PWD"
+while [[ "$dir" != "/" ]]; do
+  if [[ -f "$dir/composer.json" || -f "$dir/.php-version" ]]; then
+    symfony php -v 2>/dev/null | head -1 | awk '{print $2}'
+    exit
+  fi
+  dir="$(dirname "$dir")"
+done
+'''
+format = "via [$symbol($output )]($style)"
 style = "bold blue"
+when = '''
+dir="$PWD"
+while [[ "$dir" != "/" ]]; do
+  [[ -f "$dir/composer.json" || -f "$dir/.php-version" ]] && exit 0
+  dir="$(dirname "$dir")"
+done
+exit 1
+'''
 
 [python]
 symbol = " "

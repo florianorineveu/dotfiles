@@ -28,7 +28,7 @@ fi
 # ------------------------------------------------------------------
 
 # zsh-autosuggestions: history-based suggestions
-zinit ice lucid wait"1" atload"_zsh_autosuggest_start" pick"*_zsh_autosuggest.zsh"
+zinit ice lucid wait"1" atload"_zsh_autosuggest_start"
 zinit light zsh-users/zsh-autosuggestions
 
 # fast-syntax-highlighting: highlight commands as you type
@@ -36,8 +36,7 @@ zinit ice wait"1" lucid atinit"zpcompinit; zpcdreplay"
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 # Additional completions
-zinit ice wait"1" lucid atload"zicmdprompt" for \
-  pick"git.zsh" pick"node.zsh" pick"redis-cli.zsh" pick"yarn.zsh" pick"docker.zsh"
+zinit ice wait"1" lucid blockf
 zinit light zsh-users/zsh-completions
 
 # ------------------------------------------------------------------

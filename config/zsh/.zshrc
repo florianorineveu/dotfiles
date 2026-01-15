@@ -32,6 +32,13 @@ setopt HIST_VERIFY
 # ------------------------------------------------------------------
 # Completion
 # ------------------------------------------------------------------
+
+if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
+    FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
+elif [[ -d "/usr/local/share/zsh/site-functions" ]]; then
+    FPATH="/usr/local/share/zsh/site-functions:$FPATH"
+fi
+
 autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 
@@ -95,5 +102,7 @@ fi
 
 # thefuck
 if command -v thefuck &>/dev/null; then
+    export THEFUCK_REQUIRE_CONFIRMATION=false  # -y par défaut
     eval "$(thefuck --alias)"
+    alias FUCK='fuck'  # Monday morning
 fi

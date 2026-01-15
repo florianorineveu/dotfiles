@@ -74,8 +74,6 @@ alias cl='clear'
 alias mkdir='mkdir -p'
 alias mk='mkdir'
 alias e='nobrainextract'
-alias fuck='fuck -y'
-alias FUCK='fuck' # Monday morning
 
 # Symfony
 alias sf='symfony'
