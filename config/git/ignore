@@ -1,0 +1,80 @@
+# Global .gitignore
+#
+# Copyright (c) 2026 Florian "Ori" Neveu
+# SPDX-License-Identifier: WTFPL
+
+# ------------------------------------------------------------------
+# OS
+# ------------------------------------------------------------------
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ------------------------------------------------------------------
+# IDE
+# ------------------------------------------------------------------
+
+# Vim
+*.swp
+*.swo
+*.swn
+*.bak
+*.un~
+Session.vim
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------------------------------------------------
+# Logs and data
+# ------------------------------------------------------------------
+*.log
+*.sql
+*.sqlite
+*.db
+
+# ------------------------------------------------------------------
+# Environment
+# ------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+
+# ------------------------------------------------------------------
+# Other
+# ------------------------------------------------------------------
+
+# Temporary files
+*.tmp
+*.temp
+
+# Archives
+*.zip
+*.tar.gz
+*.rar

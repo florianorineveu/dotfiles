@@ -1,0 +1,25 @@
+# Debian/Ubuntu - Full
+# Installation: apt-get install
+
+# Base
+git
+zsh
+curl
+wget
+jq
+tree
+
+# CLI tools
+fzf
+bat
+fd-find
+ripgrep
+eza
+zoxide
+git-delta
+
+# Dev tools
+neovim
+htop
+btop
+thefuck

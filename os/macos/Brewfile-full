@@ -1,0 +1,28 @@
+# Homebrew - Full
+
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
+
+# Base
+brew "git"
+brew "zsh"
+brew "curl"
+brew "wget"
+brew "jq"
+brew "tree"
+
+# CLI tools
+brew "fzf"
+brew "bat"
+brew "fd"
+brew "ripgrep"
+brew "eza"
+brew "zoxide"
+brew "git-delta"
+
+# Dev tools
+brew "neovim"
+brew "htop"
+brew "btop"
+brew "thefuck"
+# brew "symfony-cli/tap/symfony-cli"

@@ -1,0 +1,7 @@
+#compdef dev
+
+# Autocompletion for dev function
+# Lists directories in $DEVFOLDER
+
+[[ -d "$DEVFOLDER" ]] || return 0
+_files -W "$DEVFOLDER" -/
