@@ -18,8 +18,8 @@ alias dotdir='cd $DOTFILES'
 # ------------------------------------------------------------------
 if command -v eza &>/dev/null; then
     alias ls='eza --group-directories-first'
-    alias l='eza -l --group-directories-first --git'
-    alias ll='eza -la --group-directories-first --git'
+    alias l='eza -l --group-directories-first'
+    alias ll='eza -la --group-directories-first'
     alias lt='eza --tree --level=2'
     alias lta='eza -a --tree --level=2'
     alias ltt='eza --tree --level=3'
@@ -74,6 +74,7 @@ alias cl='clear'
 alias mkdir='mkdir -p'
 alias mk='mkdir'
 alias e='nobrainextract'
+alias d='dev'
 
 # Symfony
 alias sf='symfony'

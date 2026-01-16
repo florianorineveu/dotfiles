@@ -33,6 +33,12 @@ setopt HIST_VERIFY
 # Completion
 # ------------------------------------------------------------------
 
+# Custom completions
+if [[ -d "$ZDOTDIR/completions" ]]; then
+    FPATH="$ZDOTDIR/completions:$FPATH"
+fi
+
+# Homebrew completions
 if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
     FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
 elif [[ -d "/usr/local/share/zsh/site-functions" ]]; then

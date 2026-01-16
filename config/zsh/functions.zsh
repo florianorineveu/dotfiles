@@ -65,3 +65,21 @@ mkcd() {
 
     cd "$dir" || { log_error "Impossible de se déplacer vers le dossier : $dir"; return 1; }
 }
+
+# ------------------------------------------------------------------
+# dev - Quick jump to project directories
+# ------------------------------------------------------------------
+dev() {
+    if [[ -z "$DEVFOLDER" ]]; then
+        log_error "DEVFOLDER n'est pas défini"
+        return 1
+    fi
+
+    local project="$1"
+
+    if [[ -z "$project" ]]; then
+        cd "$DEVFOLDER" || { log_error "Impossible d'accéder à $DEVFOLDER"; return 1; }
+    else
+        cd "$DEVFOLDER/$project" || { log_error "Projet introuvable : $project"; return 1; }
+    fi
+}
