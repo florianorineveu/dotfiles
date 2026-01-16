@@ -1,0 +1,30 @@
+name: Test Dotfiles
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [debian, ubuntu, arch]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Run tests for ${{ matrix.os }}
+        run: ./test/test.sh ${{ matrix.os }}
+
+      - name: Clean up Docker images
+        if: always()
+        run: docker image prune -af

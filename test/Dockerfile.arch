@@ -1,0 +1,22 @@
+FROM archlinux:latest
+
+# Installation des prérequis minimaux
+RUN pacman -Syu --noconfirm && pacman -S --noconfirm \
+    sudo \
+    curl \
+    ca-certificates \
+    && pacman -Scc --noconfirm
+
+# Création d'un utilisateur non-root avec sudo
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Switch vers l'utilisateur de test
+USER testuser
+WORKDIR /home/testuser
+
+# Copie des dotfiles
+COPY --chown=testuser:testuser . /home/testuser/.dotfiles
+
+# Point d'entrée par défaut
+CMD ["/bin/bash"]

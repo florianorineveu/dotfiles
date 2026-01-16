@@ -3,7 +3,15 @@
 # test.sh - Script de test automatisé des dotfiles
 #
 # Usage:
-#   ./test/test.sh [OPTIONS]
+#   ./test/test.sh [OS]
+#
+# Arguments:
+#   OS    Système à tester: debian, ubuntu, arch, all (défaut: all)
+#
+# Examples:
+#   ./test/test.sh          # Teste tous les OS
+#   ./test/test.sh debian   # Teste uniquement Debian
+#   ./test/test.sh arch     # Teste uniquement Arch
 #
 
 set -euo pipefail
@@ -123,6 +131,8 @@ test_dry_run() {
 # ------------------------------------------------------------------------------
 
 main() {
+    local target_os="${1:-all}"
+
     printf "\n"
     printf "${BLUE}╔════════════════════════════════════════╗${RESET}\n"
     printf "${BLUE}║     DOTFILES - TESTS AUTOMATISÉS     ║${RESET}\n"
@@ -134,17 +144,47 @@ main() {
         exit 1
     fi
 
-    # Build l'image Debian une seule fois
-    if ! build_image "debian"; then
-        log_error "Impossible de construire l'image Debian"
-        exit 1
+    # Liste des OS disponibles
+    local available_os=("debian" "ubuntu" "arch")
+    local os_list=()
+
+    # Détermine les OS à tester
+    if [[ "$target_os" == "all" ]]; then
+        os_list=("${available_os[@]}")
+    else
+        # Vérifie que l'OS demandé est valide
+        local valid=false
+        for os in "${available_os[@]}"; do
+            if [[ "$os" == "$target_os" ]]; then
+                valid=true
+                break
+            fi
+        done
+
+        if [[ "$valid" == false ]]; then
+            log_error "OS invalide: $target_os"
+            log_info "OS disponibles: ${available_os[*]}"
+            exit 1
+        fi
+
+        os_list=("$target_os")
     fi
 
-    # Tests sur Debian
-    test_dry_run "debian" "minimal"
-    test_dry_run "debian" "full"
-    test_profile "debian" "minimal"
-    test_profile "debian" "full"
+    # Build les images
+    for os in "${os_list[@]}"; do
+        if ! build_image "$os"; then
+            log_error "Impossible de construire l'image $os"
+            exit 1
+        fi
+    done
+
+    # Tests sur chaque OS
+    for os in "${os_list[@]}"; do
+        test_dry_run "$os" "minimal"
+        test_dry_run "$os" "full"
+        test_profile "$os" "minimal"
+        test_profile "$os" "full"
+    done
 
     # Résumé
     printf "\n"

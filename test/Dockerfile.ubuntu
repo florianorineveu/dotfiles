@@ -1,0 +1,22 @@
+FROM ubuntu:24.04
+
+# Installation des prérequis minimaux
+RUN apt-get update && apt-get install -y \
+    sudo \
+    curl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Création d'un utilisateur non-root avec sudo
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Switch vers l'utilisateur de test
+USER testuser
+WORKDIR /home/testuser
+
+# Copie des dotfiles
+COPY --chown=testuser:testuser . /home/testuser/.dotfiles
+
+# Point d'entrée par défaut
+CMD ["/bin/bash"]

@@ -68,6 +68,61 @@ alias gnuke='git reset --hard HEAD'
 alias glog='git log --graph --pretty=format:"%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative'
 
 # ------------------------------------------------------------------
+# fd - A modern find
+# ------------------------------------------------------------------
+if command -v fd &>/dev/null; then
+    alias f='fd'
+    alias ff='fd --type f'
+    alias fdir='fd --type d'
+    alias fh='fd --hidden'
+fi
+
+# ------------------------------------------------------------------
+# ripgrep - A modern grep
+# ------------------------------------------------------------------
+if command -v rg &>/dev/null; then
+    alias rgs='rg --smart-case'
+    alias rgi='rg --ignore-case'
+    alias rgl='rg -l'
+fi
+
+# ------------------------------------------------------------------
+# fzf - Fuzzy finder
+# ------------------------------------------------------------------
+if command -v fzf &>/dev/null && command -v bat &>/dev/null; then
+    alias fzp='fzf --preview "bat --color=always {}"'
+fi
+
+# ------------------------------------------------------------------
+# Network
+# ------------------------------------------------------------------
+alias get='curl -O -L'
+alias wgets='wget --mirror --convert-links --page-requisites'
+
+# ------------------------------------------------------------------
+# jq
+# ------------------------------------------------------------------
+if command -v jq &>/dev/null; then
+    alias jqc='jq -C'
+    alias jqr='jq -r'
+fi
+
+# ------------------------------------------------------------------
+# Docker
+# ------------------------------------------------------------------
+if command -v docker &>/dev/null; then
+    alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
+    alias dexec='docker exec -it $(docker ps --format "{{.Names}}" | fzf) bash'
+    alias dlogs='docker logs -f $(docker ps --format "{{.Names}}" | fzf)'
+
+    alias dc='docker compose'
+    alias dcfresh='docker compose pull && docker compose up -d --build'
+    alias dcnuke='docker compose down -v --remove-orphans'
+    alias dclog='docker compose logs -f $(docker compose ps --services | fzf)'
+    alias dcexec='docker compose exec $(docker compose ps --services | fzf) bash'
+fi
+
+# ------------------------------------------------------------------
 # Other
 # ------------------------------------------------------------------
 alias cl='clear'
@@ -75,6 +130,7 @@ alias mkdir='mkdir -p'
 alias mk='mkdir'
 alias e='nobrainextract'
 alias d='dev'
+alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 
 # Symfony
 alias sf='symfony'
