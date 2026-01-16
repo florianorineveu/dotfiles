@@ -48,7 +48,7 @@ show_help() {
     printf "    ./install.sh [OPTIONS]\n\n"
     printf "${CYAN}Options:${RESET}\n"
     printf "    --profile=PROFILE   Profil d'installation:\n"
-    printf "                        - ${GREEN}minimal${RESET}: git, zsh, starship\n"
+    printf "                        - ${GREEN}minimal${RESET}: git, zsh\n"
     printf "                        - ${GREEN}full${RESET}: tous les outils [défaut]\n"
     printf "    --backup            Sauvegarde la config existante avant installation\n"
     printf "    --no-packages       N'installe pas les paquets, symlinks seulement\n"
@@ -132,9 +132,7 @@ install_symlinks() {
     # ~/.zshenv → config/zsh/.zshenv
     create_symlink "$DOTFILES/config/zsh/.zshenv" "$HOME/.zshenv"
 
-    # ~/.config/starship.toml
     ensure_dir "$HOME/.config"
-    create_symlink "$DOTFILES/config/starship.toml" "$HOME/.config/starship.toml"
 
     # ~/.config/git/
     ensure_dir "$HOME/.config/git"

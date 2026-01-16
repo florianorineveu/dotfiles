@@ -27,6 +27,10 @@ fi
 # Plugins
 # ------------------------------------------------------------------
 
+# Pure prompt
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
+
 # zsh-autosuggestions: history-based suggestions
 zinit ice lucid wait"1" atload"_zsh_autosuggest_start"
 zinit light zsh-users/zsh-autosuggestions
@@ -42,6 +46,9 @@ zinit light zsh-users/zsh-completions
 # ------------------------------------------------------------------
 # Plugins configuration
 # ------------------------------------------------------------------
+
+# Pure
+zstyle :prompt:pure:git:stash show yes
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'        # "muted" style

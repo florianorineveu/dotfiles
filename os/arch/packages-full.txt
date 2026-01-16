@@ -17,7 +17,6 @@ ripgrep
 eza
 zoxide
 git-delta
-starship
 
 # Dev tools
 neovim

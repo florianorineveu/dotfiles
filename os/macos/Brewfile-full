@@ -1,5 +1,8 @@
 # Homebrew - Full
 
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
+
 # Base
 brew "git"
 brew "zsh"
@@ -16,7 +19,6 @@ brew "ripgrep"
 brew "eza"
 brew "zoxide"
 brew "git-delta"
-brew "starship"
 
 # Dev tools
 brew "neovim"

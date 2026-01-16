@@ -76,6 +76,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Keybindings
 [[ -f "$ZDOTDIR/keybindings.zsh" ]] && source "$ZDOTDIR/keybindings.zsh"
 
+# Right prompt (language versions)
+[[ -f "$ZDOTDIR/rprompt.zsh" ]] && source "$ZDOTDIR/rprompt.zsh"
+
 # OS-specific configuration
 os_config="$DOTFILES/os/$(detect_os)/config.zsh"
 [[ -f "$os_config" ]] && source "$os_config"
@@ -86,11 +89,6 @@ os_config="$DOTFILES/os/$(detect_os)/config.zsh"
 # ------------------------------------------------------------------
 # Tools initialization (Let the Magic Begin!)
 # ------------------------------------------------------------------
-
-# Starship
-if command -v starship &>/dev/null; then
-    eval "$(starship init zsh)"
-fi
 
 # Zoxide
 if command -v zoxide &>/dev/null; then
