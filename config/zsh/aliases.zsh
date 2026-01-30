@@ -34,7 +34,7 @@ fi
 # Cat (bat) - A cat with wings. Did Schrödinger have one?
 # ------------------------------------------------------------------
 if command -v bat &>/dev/null; then
-    alias cat='bat'
+#    alias cat='bat'
 fi
 
 # ------------------------------------------------------------------
