@@ -114,6 +114,56 @@ install_from_brewfile() {
 }
 
 # ------------------------------------------------------------------
+# Package listing (for dry-run)
+# ------------------------------------------------------------------
+list_packages_from_file() {
+    local file="$1"
+
+    if [[ ! -f "$file" ]]; then
+        return 1
+    fi
+
+    while IFS= read -r package || [[ -n "$package" ]]; do
+        [[ -z "$package" ]] && continue
+        [[ "$package" =~ ^[[:space:]]*# ]] && continue
+        package=$(echo "$package" | xargs)
+        echo "    - $package"
+    done < "$file"
+}
+
+list_packages_from_brewfile() {
+    local brewfile="$1"
+
+    if [[ ! -f "$brewfile" ]]; then
+        return 1
+    fi
+
+    grep -E '^brew |^cask ' "$brewfile" | sed 's/^brew "\([^"]*\)".*/    - \1/' | sed 's/^cask "\([^"]*\)".*/    - \1 (cask)/'
+}
+
+list_profile_packages() {
+    local profile="$1"
+    local os pkg_manager
+
+    os=$(detect_os)
+    pkg_manager=$(detect_package_manager)
+
+    if [[ "$pkg_manager" == "none" ]]; then
+        echo "    (pas de gestionnaire de paquets détecté)"
+        return
+    fi
+
+    case "$pkg_manager" in
+        apt|pacman)
+            list_packages_from_file "$DOTFILES/os/$os/packages-${profile}.txt"
+            ;;
+        brew)
+            list_packages_from_brewfile "$DOTFILES/os/macos/Brewfile-${profile}"
+            ;;
+    esac
+}
+
+# ------------------------------------------------------------------
 # Profil installation
 # ------------------------------------------------------------------
 install_minimal_tools() {
