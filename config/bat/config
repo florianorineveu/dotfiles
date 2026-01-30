@@ -3,7 +3,7 @@
 # Copyright (c) 2026 Florian "Ori" Neveu
 # SPDX-License-Identifier: WTFPL
 
---theme="Catppuccin Mocha"
+--theme="Dracula"
 --style="numbers,grid,changes"
 --color=always
 --italic-text=always

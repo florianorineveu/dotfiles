@@ -33,9 +33,8 @@ fi
 # ------------------------------------------------------------------
 # Cat (bat) - A cat with wings. Did Schrödinger have one?
 # ------------------------------------------------------------------
-if command -v bat &>/dev/null; then
-#    alias cat='bat'
-fi
+# On Debian/Ubuntu, bat is installed as batcat due to name conflict
+command -v batcat &>/dev/null && ! command -v bat &>/dev/null && alias bat='batcat'
 
 # ------------------------------------------------------------------
 # Git (gud, lol)
