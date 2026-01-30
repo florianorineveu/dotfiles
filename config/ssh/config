@@ -1,0 +1,15 @@
+# SSH client configuration
+#
+# Copyright (c) 2026 Florian "Ori" Neveu
+# SPDX-License-Identifier: WTFPL
+
+# Local configuration (hosts, keys, etc.)
+Include config.local
+
+Host *
+    # Automatically add keys to agent on first use
+    AddKeysToAgent yes
+
+    # macOS Keychain integration (ignored on Linux)
+    IgnoreUnknown UseKeychain
+    UseKeychain yes

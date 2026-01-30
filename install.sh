@@ -161,6 +161,11 @@ install_symlinks() {
     if [[ -d "$DOTFILES/config/bat" ]]; then
         create_symlink "$DOTFILES/config/bat" "$HOME/.config/bat"
     fi
+
+    # ~/.ssh/config
+    ensure_dir "$HOME/.ssh"
+    chmod 700 "$HOME/.ssh"
+    create_symlink "$DOTFILES/config/ssh/config" "$HOME/.ssh/config"
 }
 
 # ------------------------------------------------------------------
@@ -221,6 +226,25 @@ post_install() {
 # alias perso="..."
 EOF
         log_substep "Créé: ~/.zshrc.local"
+    fi
+
+    # Crée la config SSH locale si absente
+    if [[ ! -f "$HOME/.ssh/config.local" ]]; then
+        cat > "$HOME/.ssh/config.local" << 'EOF'
+# Configuration SSH locale (non versionnée)
+# Ajoute ici tes hosts et clés personnels
+
+# Exemple:
+# Host github.com
+#     IdentityFile ~/.ssh/id_ed25519
+#
+# Host serveur-perso
+#     HostName 192.168.1.100
+#     User admin
+#     IdentityFile ~/.ssh/id_rsa
+EOF
+        chmod 600 "$HOME/.ssh/config.local"
+        log_substep "Créé: ~/.ssh/config.local"
     fi
 
     # Crée la config git locale si absente
@@ -289,6 +313,7 @@ main() {
         echo "    ~/.config/git/config → $DOTFILES/config/git/config"
         echo "    ~/.config/git/ignore → $DOTFILES/config/git/ignore"
         [[ -d "$DOTFILES/config/bat" ]] && echo "    ~/.config/bat → $DOTFILES/config/bat"
+        echo "    ~/.ssh/config → $DOTFILES/config/ssh/config"
 
         if $INSTALL_PACKAGES; then
             log_step "Paquets qui seraient installés (profil: $PROFILE)"

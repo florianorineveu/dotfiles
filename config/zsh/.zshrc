@@ -45,8 +45,24 @@ elif [[ -d "/usr/local/share/zsh/site-functions" ]]; then
     FPATH="/usr/local/share/zsh/site-functions:$FPATH"
 fi
 
+# Filter out broken symlinks from vendor-completions (e.g., Docker on WSL)
+# This prevents compinit errors when completion files point to unmounted paths
+if [[ -d "/usr/share/zsh/vendor-completions" ]]; then
+    local comp_file
+    for comp_file in /usr/share/zsh/vendor-completions/_*; do
+        [[ -L "$comp_file" && ! -e "$comp_file" ]] && continue
+    done
+fi
+
 autoload -Uz compinit
-compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
+# Use -C to skip security check and speed up startup
+# Regenerate dump once a day or if missing
+local zcompdump="$XDG_CACHE_HOME/zsh/zcompdump"
+if [[ -n "$zcompdump"(#qN.mh+24) || ! -f "$zcompdump" ]]; then
+    compinit -d "$zcompdump"
+else
+    compinit -C -d "$zcompdump"
+fi
 
 # Case insensitive
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -60,6 +76,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # ------------------------------------------------------------------
 # Imports
 # ------------------------------------------------------------------
+
+# SSH agent (shared across sessions)
+[[ -f "$ZDOTDIR/ssh-agent.zsh" ]] && source "$ZDOTDIR/ssh-agent.zsh"
 
 # Plugins, powered by zinit
 [[ -f "$ZDOTDIR/plugins.zsh" ]] && source "$ZDOTDIR/plugins.zsh"
