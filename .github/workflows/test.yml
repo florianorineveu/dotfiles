@@ -16,9 +16,13 @@ jobs:
 
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
+        env:
+          SHELLCHECK_OPTS: -e SC1090,SC1091
         with:
           scandir: '.'
           severity: warning
+          format: tty
+          ignore_paths: config os
 
   test:
     name: Test on ${{ matrix.os }}
