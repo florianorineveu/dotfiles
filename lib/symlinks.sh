@@ -126,28 +126,6 @@ check_symlink() {
     fi
 }
 
-# ------------------------------------------------------------------
-# Batch operations
-# ------------------------------------------------------------------
-create_symlinks_from_file() {
-    local mapping_file="$1"
-
-    if [[ ! -f "$mapping_file" ]]; then
-        log_error "Fichier de mapping inexistant: $mapping_file"
-        return 1
-    fi
-
-    while IFS='|' read -r source dest; do
-        [[ -z "$source" ]] && continue
-        [[ "$source" =~ ^# ]] && continue
-
-        source=$(eval echo "$source")
-        dest=$(eval echo "$dest")
-
-        create_symlink "$source" "$dest"
-    done < "$mapping_file"
-}
-
 list_dotfiles_symlinks() {
     local dotfiles_dir="${DOTFILES:-$HOME/.dotfiles}"
 

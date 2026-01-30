@@ -11,6 +11,7 @@
 #   --no-packages       Don't install packages, only symlinks
 #   --dry-run           Displays what would be done without executing it
 #   --rollback          Restore last backup
+#   -y, --yes           Skip confirmation (for CI/automation)
 #   -h, --help          Display this help
 #
 
@@ -28,6 +29,7 @@ DO_BACKUP=false
 INSTALL_PACKAGES=true
 DRY_RUN=false
 DO_ROLLBACK=false
+ASSUME_YES=false
 
 VALID_PROFILES="minimal full"
 
@@ -54,6 +56,7 @@ show_help() {
     printf "    --no-packages       N'installe pas les paquets, symlinks seulement\n"
     printf "    --dry-run           Affiche ce qui serait fait sans l'exécuter\n"
     printf "    --rollback          Restaure la dernière sauvegarde\n"
+    printf "    -y, --yes           Skip la confirmation (pour CI/automation)\n"
     printf "    -h, --help          Affiche cette aide\n\n"
     printf "${CYAN}Exemples:${RESET}\n"
     printf "    ./install.sh                          # Installation full par défaut\n"
@@ -70,6 +73,7 @@ parse_args() {
         case "$1" in
             --profile=*)
                 PROFILE="${1#*=}"
+                # shellcheck disable=SC2076 # Intentional literal match
                 if [[ ! " $VALID_PROFILES " =~ " $PROFILE " ]]; then
                     die "Profil invalide: $PROFILE (valides: $VALID_PROFILES)"
                 fi
@@ -85,6 +89,9 @@ parse_args() {
                 ;;
             --rollback)
                 DO_ROLLBACK=true
+                ;;
+            -y|--yes)
+                ASSUME_YES=true
                 ;;
             -h|--help)
                 show_help
@@ -104,11 +111,22 @@ parse_args() {
 # Configuration display
 # ------------------------------------------------------------------
 
+get_dotfiles_version() {
+    if [[ -d "$DOTFILES/.git" ]]; then
+        git -C "$DOTFILES" rev-parse --short HEAD 2>/dev/null || echo "unknown"
+    elif [[ -f "$DOTFILES/.version" ]]; then
+        cat "$DOTFILES/.version"
+    else
+        echo "unknown"
+    fi
+}
+
 show_summary() {
     echo ""
     log_step "Configuration"
     echo ""
     echo "  Dotfiles:    $DOTFILES"
+    echo "  Version:     $(get_dotfiles_version)"
     echo "  Profil:      $PROFILE"
     echo "  Backup:      $(${DO_BACKUP} && echo "oui" || echo "non")"
     echo "  Packages:    $(${INSTALL_PACKAGES} && echo "oui" || echo "non")"
@@ -177,7 +195,7 @@ post_install() {
         if [[ "$SHELL" != "$zsh_path" ]]; then
             if has_sudo || can_sudo; then
                 log_substep "Changement du shell par défaut vers zsh"
-                if ! grep -q "$zsh_path" /etc/shells; then
+                if ! grep -qF "$zsh_path" /etc/shells; then
                     echo "$zsh_path" | maybe_sudo tee -a /etc/shells > /dev/null
                 fi
                 if [[ -n "$USER" ]]; then
@@ -247,7 +265,7 @@ main() {
     show_summary
 
     # Confirmation
-    if ! $DRY_RUN; then
+    if ! $DRY_RUN && ! $ASSUME_YES; then
         if ! prompt_confirm "Continuer l'installation ?"; then
             log_info "Installation annulée"
             exit 0
@@ -266,8 +284,16 @@ main() {
 
     # Installation
     if $DRY_RUN; then
-        log_info "[DRY-RUN] Symlinks seraient créés"
-        log_info "[DRY-RUN] Paquets du profil '$PROFILE' seraient installés"
+        log_step "Symlinks qui seraient créés"
+        echo "    ~/.zshenv → $DOTFILES/config/zsh/.zshenv"
+        echo "    ~/.config/git/config → $DOTFILES/config/git/config"
+        echo "    ~/.config/git/ignore → $DOTFILES/config/git/ignore"
+        [[ -d "$DOTFILES/config/bat" ]] && echo "    ~/.config/bat → $DOTFILES/config/bat"
+
+        if $INSTALL_PACKAGES; then
+            log_step "Paquets qui seraient installés (profil: $PROFILE)"
+            list_profile_packages "$PROFILE"
+        fi
     else
         install_symlinks
         install_profile
