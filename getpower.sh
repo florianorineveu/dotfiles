@@ -52,8 +52,8 @@ if [[ ! -f "$TEMP_DIR/install.sh" ]]; then
     error "Invalid archive: install.sh not found"
 fi
 
-# Store version (commit hash from GitHub API)
-COMMIT_HASH=$(curl -fsSL --connect-timeout 10 "https://api.github.com/repos/florianorineveu/dotfiles/commits/main" 2>/dev/null | grep -m1 '"sha"' | cut -d'"' -f4 | head -c7)
+# Store version (commit hash from GitHub API) - || true to ignore pipeline errors
+COMMIT_HASH=$(curl -fsSL --connect-timeout 10 "https://api.github.com/repos/florianorineveu/dotfiles/commits/main" 2>/dev/null | grep -m1 '"sha"' | cut -d'"' -f4 | head -c7 || true)
 if [[ -n "$COMMIT_HASH" ]]; then
     echo "$COMMIT_HASH" > "$TEMP_DIR/.version"
 fi
