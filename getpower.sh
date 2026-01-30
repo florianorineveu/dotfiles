@@ -6,7 +6,7 @@
 # getpower.sh - Bootstrap script for remote installation
 #
 # Usage:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/florianorineveu/dotfiles/main/getpower.sh)"
+#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/florianorineveu/dotfiles/main/getpower.sh)"
 #
 # Options are passed to install.sh (see install.sh --help)
 #

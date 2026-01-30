@@ -5,29 +5,25 @@
 #
 # Shell helpers/logging/colors
 
-# Guard
-if [[ -z "${DOTFILES_UTILS_LOADED:-}" ]]; then
-    export DOTFILES_UTILS_LOADED=1
-
-    if [[ -t 1 ]]; then
-        readonly RED='\033[0;31m'
-        readonly GREEN='\033[0;32m'
-        readonly YELLOW='\033[0;33m'
-        readonly BLUE='\033[0;34m'
-        readonly MAGENTA='\033[0;35m'
-        readonly CYAN='\033[0;36m'
-        readonly BOLD='\033[1m'
-        readonly RESET='\033[0m'
-    else
-        readonly RED=''
-        readonly GREEN=''
-        readonly YELLOW=''
-        readonly BLUE=''
-        readonly MAGENTA=''
-        readonly CYAN=''
-        readonly BOLD=''
-        readonly RESET=''
-    fi
+# Colors
+if [[ -t 1 ]]; then
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[0;33m'
+    BLUE='\033[0;34m'
+    MAGENTA='\033[0;35m'
+    CYAN='\033[0;36m'
+    BOLD='\033[1m'
+    RESET='\033[0m'
+else
+    RED=''
+    GREEN=''
+    YELLOW=''
+    BLUE=''
+    MAGENTA=''
+    CYAN=''
+    BOLD=''
+    RESET=''
 fi
 
 # ------------------------------------------------------------------
