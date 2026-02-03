@@ -116,10 +116,19 @@ fi
 
 # fzf
 if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+    # Debian/Ubuntu (apt)
     source /usr/share/doc/fzf/examples/key-bindings.zsh
 elif [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
+    # Arch (pacman)
     source /usr/share/fzf/key-bindings.zsh
+elif [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
+    # macOS Apple Silicon (brew)
+    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+elif [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
+    # macOS Intel (brew)
+    source /usr/local/opt/fzf/shell/key-bindings.zsh
 elif [[ -f ~/.fzf.zsh ]]; then
+    # Manual install fallback
     source ~/.fzf.zsh
 fi
 
