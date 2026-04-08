@@ -100,7 +100,13 @@ add-zsh-hook precmd _cmd_timer_precmd
 # ------------------------------------------------------------------
 # Prompt
 # ------------------------------------------------------------------
+if [[ -n "$SSH_CONNECTION" ]]; then
+    HOST_DISPLAY="${RED}[%M - SSH]${RESET}"
+else
+    HOST_DISPLAY="${GRAY}[%M]${RESET}"
+fi
+
 RPROMPT="\${_CMD_DURATION:+\${_CMD_DURATION}     }${GRAY}%*${RESET}"
 PROMPT="
-╭─${GRAY}[%M]${RESET} as ${ORANGE}%n${RESET} in ${CYAN}%~${RESET}\${_GIT_PROMPT}
+╭─${HOST_DISPLAY} as ${ORANGE}%n${RESET} in ${CYAN}%~${RESET}\${_GIT_PROMPT}
 ╰─%(?.${RESET}.${RED})(ﾉ°Д°)ﾉ%f "
