@@ -162,6 +162,10 @@ install_symlinks() {
         create_symlink "$DOTFILES/config/bat" "$HOME/.config/bat"
     fi
 
+    if [[ -d "$DOTFILES/config/nvim" ]]; then
+        create_symlink "$DOTFILES/config/nvim" "$HOME/.config/nvim"
+    fi
+
     # ~/.ssh/config
     ensure_dir "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
