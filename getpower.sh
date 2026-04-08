@@ -73,4 +73,4 @@ info "Extracted to $DOTFILES_DIR"
 echo ""
 
 # Hand off to installer
-exec "$DOTFILES_DIR/install.sh" "$@"
+exec "$DOTFILES_DIR/install.sh" ${@+"$@"}
