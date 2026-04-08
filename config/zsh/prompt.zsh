@@ -4,16 +4,16 @@
 # SPDX-License-Identifier: WTFPL
 
 # ------------------------------------------------------------------
-# Colors
+# Colors (prefixed to avoid conflicts with lib/utils.sh ANSI vars)
 # ------------------------------------------------------------------
-RESET="%f"
-BLUE="%F{blue}"
-CYAN="%F{cyan}"
-GRAY="%F{gray}"
-MAGENTA="%F{magenta}"
-ORANGE="%F{220}"
-RED="%F{red}"
-YELLOW="%F{yellow}"
+_P_RESET="%f"
+_P_BLUE="%F{blue}"
+_P_CYAN="%F{cyan}"
+_P_GRAY="%F{gray}"
+_P_MAGENTA="%F{magenta}"
+_P_ORANGE="%F{220}"
+_P_RED="%F{red}"
+_P_YELLOW="%F{yellow}"
 
 # ------------------------------------------------------------------
 # Git prompt
@@ -44,7 +44,7 @@ _git_prompt_info() {
         git_action="bisect"
     fi
 
-    [[ -n "$git_action" ]] && git_action="${RESET}|${RED}${git_action}"
+    [[ -n "$git_action" ]] && git_action="${_P_RESET}|${_P_RED}${git_action}"
 
     # Status flags: ✚ staged, * modified, ? untracked, ⇡ ahead, ⇣ behind, ≡ stash
     local git_status=""
@@ -60,7 +60,7 @@ _git_prompt_info() {
 
     git rev-parse --verify refs/stash &>/dev/null && git_status+="≡"
 
-    _GIT_PROMPT=" on (${BLUE}${git_branch}${git_action}${RESET})${MAGENTA}${git_status}${RESET}"
+    _GIT_PROMPT=" on (${_P_BLUE}${git_branch}${git_action}${_P_RESET})${_P_MAGENTA}${git_status}${_P_RESET}"
 }
 
 autoload -Uz add-zsh-hook
@@ -88,9 +88,9 @@ _cmd_timer_precmd() {
     [[ $duration -lt $_CMD_TIMER_THRESHOLD ]] && return
 
     if [[ $duration -ge 60 ]]; then
-        _CMD_DURATION="${YELLOW}$((duration / 60))m $((duration % 60))s${RESET}"
+        _CMD_DURATION="${_P_YELLOW}$((duration / 60))m $((duration % 60))s${_P_RESET}"
     else
-        _CMD_DURATION="${YELLOW}${duration}s${RESET}"
+        _CMD_DURATION="${_P_YELLOW}${duration}s${_P_RESET}"
     fi
 }
 
@@ -100,13 +100,19 @@ add-zsh-hook precmd _cmd_timer_precmd
 # ------------------------------------------------------------------
 # Prompt
 # ------------------------------------------------------------------
-if [[ -n "$SSH_CONNECTION" ]]; then
-    HOST_DISPLAY="${RED}[%M - SSH]${RESET}"
+if is_macos 2>/dev/null; then
+    _P_HOSTNAME=$(scutil --get ComputerName 2>/dev/null || echo '%M')
 else
-    HOST_DISPLAY="${GRAY}[%M]${RESET}"
+    _P_HOSTNAME='%M'
 fi
 
-RPROMPT="\${_CMD_DURATION:+\${_CMD_DURATION}     }${GRAY}%*${RESET}"
+if [[ -n "$SSH_CONNECTION" ]]; then
+    HOST_DISPLAY="${_P_RED}[${_P_HOSTNAME} - SSH]${_P_RESET}"
+else
+    HOST_DISPLAY="${_P_GRAY}[${_P_HOSTNAME}]${_P_RESET}"
+fi
+
+RPROMPT="\${_CMD_DURATION:+\${_CMD_DURATION}     }${_P_GRAY}%*${_P_RESET}"
 PROMPT="
-╭─${HOST_DISPLAY} as ${ORANGE}%n${RESET} in ${CYAN}%~${RESET}\${_GIT_PROMPT}
-╰─%(?.${RESET}.${RED})(ﾉ°Д°)ﾉ%f "
+╭─${HOST_DISPLAY} as ${_P_ORANGE}%n${_P_RESET} in ${_P_CYAN}%~${_P_RESET}\${_GIT_PROMPT}
+╰─%(?.${_P_RESET}.${_P_RED})(ﾉ°Д°)ﾉ%f "
