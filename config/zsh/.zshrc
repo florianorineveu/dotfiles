@@ -77,6 +77,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Imports
 # ------------------------------------------------------------------
 
+# Prompt
+[[ -f "$ZDOTDIR/prompt.zsh" ]] && source "$ZDOTDIR/prompt.zsh"
+
 # SSH agent (shared across sessions)
 [[ -f "$ZDOTDIR/ssh-agent.zsh" ]] && source "$ZDOTDIR/ssh-agent.zsh"
 
@@ -94,9 +97,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Keybindings
 [[ -f "$ZDOTDIR/keybindings.zsh" ]] && source "$ZDOTDIR/keybindings.zsh"
-
-# Right prompt (language versions)
-[[ -f "$ZDOTDIR/rprompt.zsh" ]] && source "$ZDOTDIR/rprompt.zsh"
 
 # OS-specific configuration
 os_config="$DOTFILES/os/$(detect_os)/config.zsh"
