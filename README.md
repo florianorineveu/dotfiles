@@ -7,7 +7,7 @@ Configuration personnelle pour un environnement de développement universel et e
 ### One-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/florianorineveu/dotfiles/main/install.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/florianorineveu/dotfiles/main/getpower.sh)"
 ```
 
 ### Installation personnalisée
