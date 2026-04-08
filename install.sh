@@ -219,6 +219,15 @@ post_install() {
         fi
     fi
 
+    # Reconstruit le cache bat (thèmes custom)
+    local bat_cmd=""
+    command_exists bat && bat_cmd="bat"
+    command_exists batcat && bat_cmd="batcat"
+    if [[ -n "$bat_cmd" ]]; then
+        log_substep "Reconstruction du cache bat"
+        "$bat_cmd" cache --build > /dev/null 2>&1
+    fi
+
     # Crée le fichier local si absent
     if [[ ! -f "$HOME/.zshrc.local" ]]; then
         cat > "$HOME/.zshrc.local" << 'EOF'
