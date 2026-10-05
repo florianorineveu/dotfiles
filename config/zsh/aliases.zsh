@@ -142,7 +142,7 @@ if is_wsl; then
 fi
 
 # Linux/macOS
-if is_macos || is_debian_based || is_arch_based; then
+if is_macos || is_debian_based || is_arch_based || is_nixos; then
     # I don't want to have the machines against me when they rise up, sorry humanity.
     alias please='sudo'
 fi
