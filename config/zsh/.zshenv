@@ -4,8 +4,11 @@
 # SPDX-License-Identifier: WTFPL
 
 if [[ -L ~/.zshenv ]]; then
-    DOTFILES_RESOLVED="$(readlink ~/.zshenv)"
-    export DOTFILES="$(cd "$(dirname "$DOTFILES_RESOLVED")/../.." && pwd -P)"
+    # ${(%):-%x} = chemin de ce fichier tel que zsh l'a ouvert, et :A le résout
+    # en suivant TOUS les liens symboliques (un seul `readlink` ne suit que le
+    # premier maillon : avec Home Manager, ~/.zshenv pointe d'abord vers /nix/store).
+    # :h:h:h remonte de config/zsh/.zshenv jusqu'à la racine du dépôt.
+    export DOTFILES="${${(%):-%x}:A:h:h:h}"
 else
     export DOTFILES="$HOME/.dotfiles"
 fi

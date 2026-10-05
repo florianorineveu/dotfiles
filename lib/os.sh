@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: WTFPL
 #
 # Detect current OS, if is WSL and package manager
-# Only support Debian, macOS and Arch
+# Only support Debian, macOS, Arch and NixOS (packages managed by the Nix config)
 # Require ./utils.sh
 
 # Cache
@@ -31,6 +31,7 @@ detect_os() {
                 case "$ID" in
                     debian|ubuntu) _DETECTED_OS="debian" ;;
                     arch|manjaro) _DETECTED_OS="arch" ;; # I use arch btw
+                    nixos) _DETECTED_OS="nixos" ;;
                     *) _DETECTED_OS="linux" ;;
                 esac
             else
@@ -99,6 +100,10 @@ is_debian_based() {
 
 is_arch_based() {
     [[ "$(detect_os)" == "arch" ]]
+}
+
+is_nixos() {
+    [[ "$(detect_os)" == "nixos" ]]
 }
 
 print_system_info() {

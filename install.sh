@@ -176,6 +176,11 @@ install_symlinks() {
 # Installation par profil
 # ------------------------------------------------------------------
 install_profile() {
+    if is_nixos; then
+        log_info "NixOS : les paquets sont déclarés dans la configuration Nix, étape ignorée"
+        return
+    fi
+
     if ! $INSTALL_PACKAGES; then
         log_info "Installation des paquets ignorée (--no-packages)"
         return
@@ -197,7 +202,10 @@ install_profile() {
 post_install() {
     log_step "Post-installation"
 
-    if command_exists zsh; then
+    if is_nixos; then
+        # /etc/shells est généré et en lecture seule sous NixOS.
+        log_info "NixOS : le shell se définit dans la configuration (users.users.<nom>.shell)"
+    elif command_exists zsh; then
         local zsh_path
         zsh_path=$(command -v zsh)
 

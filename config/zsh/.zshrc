@@ -127,6 +127,9 @@ elif [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
 elif [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
     # macOS Intel (brew)
     source /usr/local/opt/fzf/shell/key-bindings.zsh
+elif command -v fzf &>/dev/null && fzf --zsh &>/dev/null; then
+    # fzf >= 0.48 fournit lui-même son intégration (NixOS, entre autres)
+    source <(fzf --zsh)
 elif [[ -f ~/.fzf.zsh ]]; then
     # Manual install fallback
     source ~/.fzf.zsh
